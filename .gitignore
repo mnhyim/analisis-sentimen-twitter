@@ -5,6 +5,8 @@
 # Personal stuff
 data/__backups
 utils/rand
+.idea
+__pycache__
 
 # User-specific stuff
 .idea/**/workspace.xml
