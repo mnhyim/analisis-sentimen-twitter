@@ -1,0 +1,21 @@
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<div class="has-background-primary p-6 m-0">
+    <form class="field has-addons" method="POST" action="/predict">
+      <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Tweet" name="tweet">
+      </div>
+      <div class="control">
+        <button class="button is-info">
+          Classify
+        </button>
+      </div>
+    </form>
+    <div class="container is-small p-4 has-background-info has-text-white has-text-centered">
+      <h1>Tweet: {{inputted_tweet}}</h1>
+      <h1>Sentiment Score: {{ predict_res }}</h1>
+      <h1>Polarity: {{ polarity }}</h1>
+    </div>
+</div>

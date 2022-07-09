@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sentiment Analysis</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    </head>
+    <body>
+        <section class="section has-background-black-ter m-0 pb-1">
+            <img class="image is-64x64 m-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="">
+            <h1 class="title has-text-light has-text-centered mt-6">Analisis Sentimen Twitter</h1>
+
+            <div class="p-6 m-0">
+                <form class="field has-addons" method="POST" action="/predict">
+                    <div class="control is-expanded">
+                        <input class="input is-medium" type="text" placeholder="Tweet" name="tweet">
+                    </div>
+                    <div class="control">
+                        <button class="button is-info is-medium">Classify</button>
+                    </div>
+                </form>
+                <p class="has-text-white has-text-weight-medium">Masukkan tweet dalam bahasa Indonesia</p>
+
+                <div class="mt-4">
+                    <p class="heading is-size-6 has-text-weight-light has-text-white">ln Prior Probability:</p>
+                    <p class="title is-size-6 has-text-weight-semibold has-text-light">{{ predict_calc_prior }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section has-background-black-bis">
+            <div class="columns mt-2 my-auto p-6">
+                <div class="column"> 
+                    <div class="box has-background-dark has-text-centered p-6">
+                        <div>
+                            <p class="heading is-size-6 has-text-weight-light has-text-white">Original Tweet:</p>
+                            <p class="title is-size-6 has-text-weight-semibold has-text-light">{{ predict_tweet }}</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="heading is-size-6 has-text-weight-light has-text-white">Preprocessed Tweet:</p>
+                            <p class="title  is-size-6 has-text-weight-semibold has-text-light">{{ preproc_tweet }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column"> 
+                    <div class="box has-background-dark has-text-centered p-6">
+                        <div>
+                            <p class="heading is-size-6 has-text-weight-light has-text-white">ln Likelihood of Words:</p>
+                            {% for i in words_likelihood %}
+                                <p class="title is-size-6 has-text-weight-semibold has-text-light m-0">{{ i }} </p>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-4">
+                            <p class="heading is-size-6 has-text-weight-light has-text-white">Sentiment Score:</p>
+                            <p class="title  is-size-6 has-text-weight-semibold has-text-light">{{ predict_score  }}</p>
+                        </div>
+                        <div class="mt-4">
+                            <p class="heading is-size-6 has-text-weight-light has-text-white">Polarity:</p>
+                            <p class="title is-size-6 has-text-weight-semibold has-text-light">{{ predict_polarity }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section has-background-black-ter has-text-centered">
+            <h1 class="title is-3 has-text-white">Visualisasi Dataset </h1>
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical is-8">
+                    <div class="tile">
+                        <div class="tile is-parent is-vertical">
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">Top 10 Kata Pada Dataset Negatif</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ neg_barplot_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">Top 10 Kata Pada Dataset Positif</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ pos_barplot_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile is-parent">
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">Classification Report & Confusion Matrix</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ classification_report_url }}">
+                                        <img src="data:image/png;base64, {{ confusion_matrix_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">WordCloud Top 50 Kata Pada Dataset Negatif</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ wordcloud_neg_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">WordCloud Top 50 Kata Pada Dataset Positif</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ wordcloud_pos_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="tile is-parent is-vertical">
+                        <div class="tile is-child">
+                            <div class="card tile is-child">
+                                <header class="card-header">
+                                    <p class="card-header-title">PieChart Dataset</p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <img src="data:image/png;base64, {{ piechart_url }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

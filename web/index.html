@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Sentiment Analysis</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+    <div class="has-background-primary p-6 m-0">
+      <form class="field has-addons" method="POST" action="/predict">
+        <div class="control is-expanded">
+          <input class="input" type="text" placeholder="Tweet" name="tweet">
+        </div>
+        <div class="control">
+          <button class="button is-info">
+            Classify
+          </button>
+        </div>
+      </form>
+      <div class="container is-small p-4 has-background-info has-text-white has-text-centered">
+        <h1>Tweet: {{inputted_tweet}}</h1>
+        <h1>Sentiment Score: {{ predict_res }}</h1>
+        <h1>Polarity: {{ polarity }}</h1>
+      </div>
+    </div>
+
+    <div class="container has-background-grey-darker p-6">
+      <h1 class="title has-text-light">Dataset Visualization</h1>
+      <div class="columns is-centered has-background-grey-dark is-multiline">
+        <!-- ROW 1 -->
+        <div class="column is-one-third"></div>
+        <div class="column is-one-third">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Polaritas Training Dataset
+              </p>
+            </header>
+            <div class="card-image">
+              <figure class="image">
+                <img src="data:image/png;base64, {{ pie_url }}">
+              </figure>
+            </div>    
+          </div>
+      	</div>
+        <div class="column is-one-third"></div>
+        <!-- ROW 1 -->
+
+        <!-- ROW 2 -->
+        <div class="column is-one-third">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Top 100 words in Negative dataset
+              </p>
+            </header>
+            <div class="card-image">
+              <figure class="image">
+                <img src="data:image/png;base64, {{ neg_cloud_url }}">
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-third">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Top 100 words in dataset
+              </p>
+            </header>
+            <div class="card-image">
+              <figure class="image">
+                <img src="data:image/png;base64, {{ cloud_url }}">
+              </figure>
+            </div>
+          </div>
+        </div>
+
+          <div class="column is-one-third">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Top 100 words in Positive dataset
+                </p>
+              </header>
+              <div class="card-image">
+                <figure class="image">
+                  <img src="data:image/png;base64, {{ pos_cloud_url }}">
+                </figure>
+              </div>
+            </div>
+          </div>
+        <!-- ROW 2 -->
+        </div>
+    </div>
+</body>
+
+</html>

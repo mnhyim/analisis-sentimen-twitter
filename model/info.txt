@@ -1,0 +1,45 @@
+=====================================
+case 1
+dataset tidak di apa-apakan
+
+case 2
+jumlah dataset diseimbangkan
+
+case 3
+label dataset diperbaiki
+
+case 4
+label diperbaiki
+jumlah diseimbangkan
+
+case 5
+hilangkan score 0
+=====================================
+data 1
+90%-10%
+
+data 2
+80%-20%
+
+data 3
+70%-30%
+======================================
+model_1_1 = case 1 - data 1
+model_1_2 = case 1 - data 2
+model_1_3 = case 1 - data 3
+
+model_2_1 = case 2 - data 1
+model_2_2 = case 2 - data 2
+model_2_3 = case 2 - data 3
+
+model_3_1 = case 3 - data 1
+model_3_2 = case 3 - data 2
+model_3_3 = case 3 - data 3
+
+model_4_1 = case 4 - data 1
+model_4_2 = case 4 - data 2
+model_4_3 = case 4 - data 3
+
+model_5_1 = case 5 - data 1
+model_5_2 = case 5 - data 2
+model_5_3 = case 5 - data 3
